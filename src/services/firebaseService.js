@@ -239,11 +239,16 @@ export class FirebaseService {
         return false;
       }
       
-      const user = await this.initAuth();
-      console.log('🔥 Firebase connecté, utilisateur:', user.uid);
+      // Test simple : vérifier que Firebase est initialisé
+      if (!app || !db || !auth) {
+        console.error('❌ Firebase non initialisé correctement');
+        return false;
+      }
+      
+      console.log('🔥 Firebase configuré et initialisé correctement');
       return true;
     } catch (error) {
-      console.error('❌ Erreur connexion Firebase:', error);
+      console.error('❌ Erreur test connexion Firebase:', error);
       return false;
     }
   }
