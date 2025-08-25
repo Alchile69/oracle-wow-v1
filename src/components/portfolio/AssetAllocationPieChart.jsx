@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import * as TWEEN from '@tweenjs/tween.js';
-import { FirebaseService } from '../../services/firebaseService';
+import { FirebaseServiceNew as FirebaseService } from '../../services/firebaseServiceNew';
 import { useToast } from '../ui/ToastNotification';
 import { LoadingButton } from '../ui/LoadingSpinner';
 import { useDebouncedCallback } from '../../hooks/useDebounce';
