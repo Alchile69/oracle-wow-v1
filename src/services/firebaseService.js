@@ -31,14 +31,20 @@ const firebaseConfig = {
 // Vérification de la configuration
 const isConfigValid = Object.values(firebaseConfig).every(value => value && value !== 'undefined');
 
-console.log('🔥 Configuration Firebase:', {
-  apiKey: firebaseConfig.apiKey ? '✅ Définie' : '❌ Manquante',
+console.log('🔥 Configuration Firebase DEBUG:', {
+  apiKey: firebaseConfig.apiKey ? `✅ ${firebaseConfig.apiKey.substring(0, 20)}...` : '❌ Manquante',
   authDomain: firebaseConfig.authDomain ? '✅ Définie' : '❌ Manquante',
   projectId: firebaseConfig.projectId ? '✅ Définie' : '❌ Manquante',
   storageBucket: firebaseConfig.storageBucket ? '✅ Définie' : '❌ Manquante',
   messagingSenderId: firebaseConfig.messagingSenderId ? '✅ Définie' : '❌ Manquante',
   appId: firebaseConfig.appId ? '✅ Définie' : '❌ Manquante',
   isValid: isConfigValid ? '✅ Valide' : '❌ Invalide'
+});
+
+console.log('🔍 VARIABLES ENV DEBUG:', {
+  VITE_FIREBASE_API_KEY: import.meta.env.VITE_FIREBASE_API_KEY ? `✅ ${import.meta.env.VITE_FIREBASE_API_KEY.substring(0, 20)}...` : '❌ Manquante',
+  VITE_FIREBASE_PROJECT_ID: import.meta.env.VITE_FIREBASE_PROJECT_ID || '❌ Manquante',
+  NODE_ENV: import.meta.env.NODE_ENV || 'undefined'
 });
 
 // Initialisation Firebase seulement si la configuration est valide
