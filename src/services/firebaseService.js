@@ -28,10 +28,34 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-// Initialisation Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+// Vérification de la configuration
+const isConfigValid = Object.values(firebaseConfig).every(value => value && value !== 'undefined');
+
+console.log('🔥 Configuration Firebase:', {
+  apiKey: firebaseConfig.apiKey ? '✅ Définie' : '❌ Manquante',
+  authDomain: firebaseConfig.authDomain ? '✅ Définie' : '❌ Manquante',
+  projectId: firebaseConfig.projectId ? '✅ Définie' : '❌ Manquante',
+  storageBucket: firebaseConfig.storageBucket ? '✅ Définie' : '❌ Manquante',
+  messagingSenderId: firebaseConfig.messagingSenderId ? '✅ Définie' : '❌ Manquante',
+  appId: firebaseConfig.appId ? '✅ Définie' : '❌ Manquante',
+  isValid: isConfigValid ? '✅ Valide' : '❌ Invalide'
+});
+
+// Initialisation Firebase seulement si la configuration est valide
+let app, db, auth;
+
+if (isConfigValid) {
+  try {
+    app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    auth = getAuth(app);
+    console.log('🔥 Firebase initialisé avec succès');
+  } catch (error) {
+    console.error('❌ Erreur initialisation Firebase:', error);
+  }
+} else {
+  console.warn('⚠️ Configuration Firebase invalide, Firebase désactivé');
+}
 
 // Service Firebase pour les portfolios
 export class FirebaseService {
@@ -40,6 +64,10 @@ export class FirebaseService {
    * Initialise l'authentification anonyme si nécessaire
    */
   static async initAuth() {
+    if (!isConfigValid || !auth) {
+      throw new Error('Firebase non configuré correctement');
+    }
+    
     return new Promise((resolve, reject) => {
       const unsubscribe = onAuthStateChanged(auth, async (user) => {
         unsubscribe();
@@ -69,6 +97,11 @@ export class FirebaseService {
    */
   static async savePortfolioAllocations(allocations) {
     try {
+      if (!isConfigValid) {
+        console.warn('⚠️ Firebase non configuré, sauvegarde ignorée');
+        return false;
+      }
+      
       // S'assurer que l'utilisateur est connecté
       const user = await this.initAuth();
       
@@ -101,6 +134,11 @@ export class FirebaseService {
    */
   static async getPortfolioAllocations() {
     try {
+      if (!isConfigValid) {
+        console.warn('⚠️ Firebase non configuré, utilisation des valeurs par défaut');
+        return null;
+      }
+      
       // S'assurer que l'utilisateur est connecté
       const user = await this.initAuth();
       
@@ -134,6 +172,10 @@ export class FirebaseService {
    */
   static async addToHistory(userId, allocations) {
     try {
+      if (!isConfigValid || !db) {
+        return;
+      }
+      
       const historyRef = collection(db, 'portfolios', userId, 'history');
       await addDoc(historyRef, {
         allocations,
@@ -154,6 +196,10 @@ export class FirebaseService {
    */
   static async getPortfolioHistory(limitCount = 10) {
     try {
+      if (!isConfigValid) {
+        return [];
+      }
+      
       const user = await this.initAuth();
       
       const historyRef = collection(db, 'portfolios', user.uid, 'history');
@@ -182,6 +228,11 @@ export class FirebaseService {
    */
   static async testConnection() {
     try {
+      if (!isConfigValid) {
+        console.warn('⚠️ Firebase non configuré, utilisation des valeurs par défaut');
+        return false;
+      }
+      
       const user = await this.initAuth();
       console.log('🔥 Firebase connecté, utilisateur:', user.uid);
       return true;
