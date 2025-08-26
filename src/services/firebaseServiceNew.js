@@ -177,6 +177,46 @@ export class FirebaseServiceNew {
       return false;
     }
   }
+  
+  /**
+   * Récupère les allocations du portfolio
+   */
+  static async getPortfolioAllocations() {
+    console.log('📥 === GET PORTFOLIO ALLOCATIONS ===');
+    
+    try {
+      if (!isConfigValid) {
+        console.warn('⚠️ Configuration invalide');
+        return null;
+      }
+      
+      console.log('📥 Initialisation auth...');
+      const user = await this.initAuth();
+      console.log('📥 User obtenu:', user.uid);
+      
+      const docRef = doc(db, 'portfolios', user.uid, 'allocations', 'current');
+      console.log('📥 Document ref:', docRef);
+      
+      const docSnap = await getDoc(docRef);
+      
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        console.log('📥 Données récupérées:', data);
+        
+        const { lastUpdated, userId, version, ...allocations } = data;
+        return {
+          allocations,
+          metadata: { lastUpdated, userId, version }
+        };
+      } else {
+        console.log('📭 Aucune allocation trouvée');
+        return null;
+      }
+    } catch (error) {
+      console.error('❌ ERREUR RÉCUPÉRATION:', error);
+      return null;
+    }
+  }
 }
 
 export default FirebaseServiceNew;
