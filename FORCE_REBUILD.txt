@@ -1,0 +1,4 @@
+FORCE REBUILD - $(date)
+This file forces Vercel to create a new build with the Firebase FORCED configuration.
+Timestamp: $(date +%s)
+
