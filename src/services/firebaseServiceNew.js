@@ -23,13 +23,14 @@ import {
 
 // 🔍 LOGS ULTRA-DÉTAILLÉS DES VARIABLES D'ENVIRONNEMENT
 console.log('🔍 === DIAGNOSTIC COMPLET VARIABLES ENV ===');
-console.log('🔍 import.meta.env:', import.meta.env);
+console.log('🔍 import.meta.env COMPLET:', import.meta.env);
 console.log('🔍 VITE_FIREBASE_API_KEY:', import.meta.env.VITE_FIREBASE_API_KEY);
 console.log('🔍 VITE_FIREBASE_AUTH_DOMAIN:', import.meta.env.VITE_FIREBASE_AUTH_DOMAIN);
 console.log('🔍 VITE_FIREBASE_PROJECT_ID:', import.meta.env.VITE_FIREBASE_PROJECT_ID);
 console.log('🔍 VITE_FIREBASE_STORAGE_BUCKET:', import.meta.env.VITE_FIREBASE_STORAGE_BUCKET);
 console.log('🔍 VITE_FIREBASE_MESSAGING_SENDER_ID:', import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID);
 console.log('🔍 VITE_FIREBASE_APP_ID:', import.meta.env.VITE_FIREBASE_APP_ID);
+console.log('🔍 === FIN DIAGNOSTIC VARIABLES ENV ===');
 
 // 🔥 CONFIGURATION FIREBASE AVEC LOGS DÉTAILLÉS
 const firebaseConfig = {
@@ -42,10 +43,14 @@ const firebaseConfig = {
 };
 
 console.log('🔥 === CONFIGURATION FIREBASE FINALE ===');
-console.log('🔥 firebaseConfig:', firebaseConfig);
+console.log('🔥 firebaseConfig COMPLET:', firebaseConfig);
 console.log('🔥 apiKey COMPLET:', firebaseConfig.apiKey);
-console.log('🔥 projectId:', firebaseConfig.projectId);
-console.log('🔥 authDomain:', firebaseConfig.authDomain);
+console.log('🔥 projectId COMPLET:', firebaseConfig.projectId);
+console.log('🔥 authDomain COMPLET:', firebaseConfig.authDomain);
+console.log('🔥 storageBucket COMPLET:', firebaseConfig.storageBucket);
+console.log('🔥 messagingSenderId COMPLET:', firebaseConfig.messagingSenderId);
+console.log('🔥 appId COMPLET:', firebaseConfig.appId);
+console.log('🔥 === FIN CONFIGURATION FIREBASE ===');
 
 // Vérification de la configuration
 const isConfigValid = Object.values(firebaseConfig).every(value => value && value !== 'undefined' && value !== undefined);
