@@ -6,6 +6,9 @@
  * @date 2025-08-25
  */
 
+// 🔥 FORCER l'initialisation Firebase en premier
+import './firebase-forced';
+
 import React, { useState, useEffect } from 'react';
 import { CountryProvider } from './contexts/CountryContext';
 import Dashboard from './components/layout/Dashboard';
