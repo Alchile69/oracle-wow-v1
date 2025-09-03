@@ -13,6 +13,7 @@ import {
 } from '@tanstack/react-table';
 
 import ScoreBar, { ScoreBarMini, getScoreClass, getScoreLabel } from './ScoreBar';
+import InfoTooltip, { INDICATOR_TOOLTIPS } from '../ui/InfoTooltip';
 import { fetchScreeningData, filterScreeningData, getAvailableSectors, getAvailableCountries } from '../../services/screeningService';
 
 const columnHelper = createColumnHelper();
@@ -57,7 +58,15 @@ const ScreeningTable = ({ className = '' }) => {
   // Définition des colonnes
   const columns = useMemo(() => [
     columnHelper.accessor('symbol', {
-      header: 'Symbole',
+      header: () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          Symbole
+          <InfoTooltip 
+            content="Symbole boursier de l'action et place de cotation (NASDAQ, NYSE, etc.)"
+            position="top"
+          />
+        </div>
+      ),
       cell: info => (
         <div className="symbol-cell">
           <div className="symbol-main">{info.getValue()}</div>
@@ -68,7 +77,15 @@ const ScreeningTable = ({ className = '' }) => {
     }),
     
     columnHelper.accessor('name', {
-      header: 'Nom',
+      header: () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          Nom
+          <InfoTooltip 
+            content={INDICATOR_TOOLTIPS.country}
+            position="top"
+          />
+        </div>
+      ),
       cell: info => (
         <div className="name-cell">
           <div className="name-main">{info.getValue()}</div>
@@ -81,7 +98,15 @@ const ScreeningTable = ({ className = '' }) => {
     }),
     
     columnHelper.accessor('sector', {
-      header: 'Secteur',
+      header: () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          Secteur
+          <InfoTooltip 
+            content={INDICATOR_TOOLTIPS.sector}
+            position="top"
+          />
+        </div>
+      ),
       cell: info => (
         <div className={`sector-badge sector-${info.getValue().toLowerCase().replace(/\s+/g, '-')}`}>
           {info.getValue()}
@@ -91,7 +116,15 @@ const ScreeningTable = ({ className = '' }) => {
     }),
     
     columnHelper.accessor('price', {
-      header: 'Prix',
+      header: () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          Prix
+          <InfoTooltip 
+            content={INDICATOR_TOOLTIPS.price}
+            position="top"
+          />
+        </div>
+      ),
       cell: info => (
         <div className="price-cell">
           <div className="price-main">${info.getValue()?.toFixed(2) || 'N/A'}</div>
@@ -104,7 +137,15 @@ const ScreeningTable = ({ className = '' }) => {
     }),
     
     columnHelper.accessor('pe', {
-      header: 'P/E',
+      header: () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          P/E
+          <InfoTooltip 
+            content={INDICATOR_TOOLTIPS.pe}
+            position="top"
+          />
+        </div>
+      ),
       cell: info => (
         <div className="metric-cell">
           {info.getValue()?.toFixed(1) || 'N/A'}
@@ -114,7 +155,15 @@ const ScreeningTable = ({ className = '' }) => {
     }),
     
     columnHelper.accessor('roe', {
-      header: 'ROE',
+      header: () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          ROE
+          <InfoTooltip 
+            content={INDICATOR_TOOLTIPS.roe}
+            position="top"
+          />
+        </div>
+      ),
       cell: info => (
         <div className="metric-cell">
           {info.getValue()?.toFixed(1) || 'N/A'}%
@@ -124,7 +173,15 @@ const ScreeningTable = ({ className = '' }) => {
     }),
     
     columnHelper.accessor('rsi', {
-      header: 'RSI',
+      header: () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          RSI
+          <InfoTooltip 
+            content={INDICATOR_TOOLTIPS.rsi}
+            position="top"
+          />
+        </div>
+      ),
       cell: info => (
         <div className={`rsi-cell ${getRSIClass(info.getValue())}`}>
           {info.getValue()?.toFixed(0) || 'N/A'}
@@ -134,7 +191,15 @@ const ScreeningTable = ({ className = '' }) => {
     }),
     
     columnHelper.accessor('compositeScore', {
-      header: 'Score',
+      header: () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          Score
+          <InfoTooltip 
+            content={INDICATOR_TOOLTIPS.score}
+            position="top"
+          />
+        </div>
+      ),
       cell: info => (
         <div className="score-cell">
           <ScoreBarMini score={info.getValue()} />

@@ -11,6 +11,7 @@ import './styles/responsive.css';
 import './styles/glassmorphism.css';
 import './styles/animations.css';
 import './styles/screening-table.css';
+import './styles/info-tooltip.css';
 
 // Import du composant ScreeningTable
 import ScreeningTable from './components/screening/ScreeningTable';
