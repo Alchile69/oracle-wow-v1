@@ -1,23 +1,21 @@
 /**
- * @file App-final.jsx
- * @description Version finale fonctionnelle avec la Screening Table
+ * @file App-progressive.jsx
+ * @description Version progressive qui reconstruit l'application étape par étape
  */
 
 import React, { useState, useEffect } from 'react';
 
-// Import des styles
+// Import des styles de base
 import './App.css';
-import './styles/responsive.css';
-import './styles/glassmorphism.css';
-import './styles/animations.css';
-import './styles/screening-table.css';
 
-// Import du composant ScreeningTable
-import ScreeningTable from './components/screening/ScreeningTable';
+// Import des composants de base qui fonctionnent
+import { ToastContainer, useToast } from './components/ui/ToastNotification';
 
 function App() {
   const [currentView, setCurrentView] = useState('analytics');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  const toast = useToast();
 
   // Gestionnaires d'événements
   const handleViewChange = (view) => {
@@ -27,7 +25,9 @@ function App() {
 
   const handleLoginClick = () => {
     console.log('🔐 Clic sur connexion');
-    alert('Fonctionnalité de connexion en développement');
+    if (toast && toast.info) {
+      toast.info('Fonctionnalité de connexion en développement');
+    }
   };
 
   // Rendu du contenu principal
@@ -35,21 +35,31 @@ function App() {
     switch (currentView) {
       case 'analytics':
         return (
-          <div className="analytics-view">
-            <div style={{
-              background: 'rgba(17, 24, 39, 0.95)',
-              color: 'white',
-              padding: '20px',
-              borderRadius: '8px',
-              margin: '20px',
-              marginBottom: '10px'
-            }}>
-              <h2>📈 Analytics - Screening Table</h2>
-              <p>Table de screening interactive avec 20 actifs internationaux</p>
-            </div>
+          <div className="analytics-view" style={{
+            background: 'rgba(17, 24, 39, 0.95)',
+            color: 'white',
+            padding: '20px',
+            borderRadius: '8px',
+            margin: '20px'
+          }}>
+            <h2>📈 Analytics - Screening Table</h2>
+            <p>Ici sera affichée la table de screening avec TanStack Table</p>
             
-            {/* Composant ScreeningTable */}
-            <ScreeningTable />
+            <div style={{
+              background: 'rgba(31, 41, 55, 0.8)',
+              padding: '16px',
+              borderRadius: '8px',
+              marginTop: '16px'
+            }}>
+              <h3>🎯 Fonctionnalités prévues :</h3>
+              <ul>
+                <li>✅ 20 actifs internationaux</li>
+                <li>✅ Score composite pondéré</li>
+                <li>✅ Colonnes triables</li>
+                <li>✅ Barres de score visuelles</li>
+                <li>✅ Filtrage avancé</li>
+              </ul>
+            </div>
           </div>
         );
         
@@ -64,21 +74,6 @@ function App() {
           }}>
             <h2>📊 Dashboard</h2>
             <p>Vue dashboard principale</p>
-            
-            <div style={{
-              background: 'rgba(31, 41, 55, 0.8)',
-              padding: '16px',
-              borderRadius: '8px',
-              marginTop: '16px'
-            }}>
-              <h3>🎯 Fonctionnalités disponibles :</h3>
-              <ul>
-                <li>✅ Screening Table (Analytics)</li>
-                <li>🔄 Portfolio KPIs (en développement)</li>
-                <li>🔄 Asset Allocation (en développement)</li>
-                <li>🔄 Backtesting (en développement)</li>
-              </ul>
-            </div>
           </div>
         );
         
@@ -105,8 +100,7 @@ function App() {
         background: 'rgba(17, 24, 39, 0.95)',
         color: 'white',
         padding: '16px 24px',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(10px)'
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
       }}>
         <div style={{
           display: 'flex',
@@ -117,9 +111,7 @@ function App() {
             <div style={{ fontSize: '24px' }}>🔮</div>
             <div>
               <h1 style={{ margin: 0, fontSize: '20px' }}>Oracle Portfolio</h1>
-              <div style={{ fontSize: '12px', color: '#9ca3af' }}>
-                v3.0.0 - Phase 3: Screening Table avec TanStack
-              </div>
+              <div style={{ fontSize: '12px', color: '#9ca3af' }}>v3.0.0 - Phase 3 Screening Table</div>
             </div>
           </div>
           
@@ -131,14 +123,7 @@ function App() {
               color: 'white',
               padding: '8px 16px',
               borderRadius: '6px',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
-            }}
-            onMouseOver={(e) => {
-              e.target.style.background = 'rgba(0, 255, 136, 0.3)';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.background = 'rgba(0, 255, 136, 0.2)';
+              cursor: 'pointer'
             }}
           >
             {isAuthenticated ? '👤 Profil' : '🔐 Connexion'}
@@ -150,10 +135,9 @@ function App() {
       <nav style={{
         background: 'rgba(31, 41, 55, 0.8)',
         padding: '12px 24px',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(10px)'
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
       }}>
-        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '16px' }}>
           <button 
             onClick={() => handleViewChange('dashboard')}
             style={{
@@ -162,8 +146,7 @@ function App() {
               color: 'white',
               padding: '8px 16px',
               borderRadius: '6px',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              cursor: 'pointer'
             }}
           >
             📊 Dashboard
@@ -176,8 +159,7 @@ function App() {
               color: 'white',
               padding: '8px 16px',
               borderRadius: '6px',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease'
+              cursor: 'pointer'
             }}
           >
             📈 Analytics (Screening Table)
@@ -186,7 +168,7 @@ function App() {
       </nav>
 
       {/* Contenu principal */}
-      <main style={{ minHeight: 'calc(100vh - 200px)' }}>
+      <main>
         {renderMainContent()}
       </main>
 
@@ -197,19 +179,16 @@ function App() {
         padding: '16px 24px',
         borderTop: '1px solid rgba(255, 255, 255, 0.1)',
         textAlign: 'center',
-        marginTop: '40px',
-        backdropFilter: 'blur(10px)'
+        marginTop: '40px'
       }}>
-        <div style={{ fontWeight: '600' }}>
-          🔮 Oracle Portfolio v3.0 - Phase 3: Screening Table avec TanStack
-        </div>
+        <div>🔮 Oracle Portfolio v3.0 - Phase 3: Screening Table avec TanStack</div>
         <div style={{ fontSize: '12px', marginTop: '4px' }}>
           © 2025 Scalabla Group. Tous droits réservés.
         </div>
-        <div style={{ fontSize: '11px', marginTop: '8px', color: '#6b7280' }}>
-          🎯 Fonctionnalités: Score composite pondéré • 20 actifs internationaux • Colonnes triables • Filtrage avancé
-        </div>
       </footer>
+
+      {/* Container pour les notifications toast */}
+      <ToastContainer />
     </div>
   );
 }
