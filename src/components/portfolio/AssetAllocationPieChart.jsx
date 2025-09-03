@@ -340,28 +340,28 @@ const AssetAllocationPieChart = () => {
         <div className="flex space-x-2">
           <button
             onClick={() => applyPreset('conservative')}
-            className="px-3 py-1 text-xs bg-[#4f46e5] text-white rounded-lg hover:bg-[#3730a3] transition-colors"
+            className="preset-btn btn-ripple px-3 py-1 text-xs bg-[#4f46e5] text-white rounded-lg hover:bg-[#3730a3] transition-colors"
             title="Conservative (30/50/5/15)"
           >
             Conservative
           </button>
           <button
             onClick={() => applyPreset('balanced')}
-            className="px-3 py-1 text-xs bg-[#00ff88] text-black rounded-lg hover:bg-[#00cc6a] transition-colors"
+            className="preset-btn btn-ripple px-3 py-1 text-xs bg-[#00ff88] text-black rounded-lg hover:bg-[#00cc6a] transition-colors"
             title="Balanced (60/25/10/5)"
           >
             Balanced
           </button>
           <button
             onClick={() => applyPreset('aggressive')}
-            className="px-3 py-1 text-xs bg-[#f59e0b] text-white rounded-lg hover:bg-[#d97706] transition-colors"
+            className="preset-btn btn-ripple px-3 py-1 text-xs bg-[#f59e0b] text-white rounded-lg hover:bg-[#d97706] transition-colors"
             title="Aggressive (80/10/8/2)"
           >
             Aggressive
           </button>
           <button
             onClick={resetToDefaults}
-            className="px-3 py-1 text-xs bg-[#6b7280] text-white rounded-lg hover:bg-[#4b5563] transition-colors"
+            className="preset-btn btn-ripple px-3 py-1 text-xs bg-[#6b7280] text-white rounded-lg hover:bg-[#4b5563] transition-colors"
             title="Reset to default"
           >
             Reset
@@ -371,14 +371,14 @@ const AssetAllocationPieChart = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Graphique Pie Chart */}
-        <div className="relative">
+        <div className="relative pie-chart-container will-change-transform">
           <div className="h-64 relative">
             <Pie ref={chartRef} data={chartData} options={chartOptions} />
           </div>
           
           {/* Indicateur central */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="bg-[#1a1a2e] rounded-full p-4 border-2 border-[#00ff88] shadow-lg">
+            <div className="bg-[#1a1a2e] rounded-full p-4 border-2 border-[#00ff88] shadow-lg glass-morphism">
               <div className="text-center">
                 <div className="text-2xl font-bold text-white">100%</div>
                 <div className="text-xs text-[#cccccc]">Total</div>

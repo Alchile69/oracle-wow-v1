@@ -161,7 +161,7 @@ const PortfolioKPICards = ({ portfolioData = {} }) => {
   const KPICard = ({ title, value, unit, icon, color, tooltip }) => {
     return (
       <div 
-        className="portfolio-kpi-card tooltip"
+        className="portfolio-kpi-card tooltip kpi-card animate-fade-in-slide-up glass-morphism will-change-transform"
         data-tooltip={tooltip}
         style={{
           background: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
@@ -184,12 +184,12 @@ const PortfolioKPICards = ({ portfolioData = {} }) => {
           }}>
             {title}
           </h3>
-          <div style={{ color, fontSize: '24px' }}>
+          <div className="kpi-icon will-change-transform" style={{ color, fontSize: '24px' }}>
             {icon}
           </div>
         </div>
         
-        <div className="value" style={{ 
+        <div className="value kpi-value will-change-transform" style={{ 
           color: '#fff',
           fontSize: '32px',
           fontWeight: 'bold',

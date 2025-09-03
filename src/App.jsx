@@ -22,8 +22,10 @@ import pluginSystem from './utils/PluginSystem';
 // Import des styles globaux
 import './App.css';
 import './styles/responsive.css';
+import './styles/responsive-enhanced.css';
 import './styles/glassmorphism.css';
 import './styles/animations.css';
+import './styles/enhanced-animations.css';
 
 /**
  * Composant principal de l'application

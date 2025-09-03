@@ -1,0 +1,317 @@
+/* Enhanced Responsive Design for Oracle WOW V1 - Phase 2 */
+/* Optimisations spécifiques pour les nouvelles animations et interactions */
+
+/* ===== MOBILE OPTIMIZATIONS FOR ANIMATIONS ===== */
+
+@media (max-width: 768px) {
+  /* Réduire les animations sur mobile pour les performances */
+  .kpi-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  
+  .kpi-card:hover {
+    transform: translateY(-2px) scale(1.01) !important;
+    box-shadow: 0 8px 20px rgba(0, 255, 136, 0.1) !important;
+  }
+  
+  .pie-chart-container:hover {
+    transform: scale(1.02) !important;
+  }
+  
+  /* Optimiser les animations Tween.js sur mobile */
+  .kpi-value {
+    transition: transform 0.2s ease !important;
+  }
+  
+  .kpi-icon {
+    transition: transform 0.2s ease !important;
+  }
+  
+  /* Réduire les effets glassmorphism sur mobile */
+  .glass-morphism {
+    backdrop-filter: blur(5px) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+  
+  /* Simplifier les boutons preset sur mobile */
+  .preset-btn {
+    transition: background-color 0.2s ease !important;
+  }
+  
+  .preset-btn:hover {
+    transform: none !important;
+  }
+  
+  /* Optimiser les ripple effects pour le touch */
+  .btn-ripple::before {
+    transition: width 0.3s, height 0.3s !important;
+  }
+}
+
+/* ===== TABLET OPTIMIZATIONS ===== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* KPI Cards layout optimisé pour tablet */
+  .portfolio-kpi-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.25rem !important;
+    padding: 1.5rem !important;
+  }
+  
+  .kpi-card {
+    padding: 1.5rem !important;
+    min-height: 140px !important;
+  }
+  
+  .kpi-value {
+    font-size: 1.75rem !important;
+  }
+  
+  /* Pie Chart optimisé pour tablet */
+  .pie-chart-container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+  
+  /* Animations moyennes pour tablet */
+  .kpi-card:hover {
+    transform: translateY(-3px) scale(1.015) !important;
+  }
+  
+  .pie-chart-container:hover {
+    transform: scale(1.03) !important;
+  }
+}
+
+/* ===== DESKTOP OPTIMIZATIONS ===== */
+
+@media (min-width: 1025px) {
+  /* Animations complètes sur desktop */
+  .kpi-card:hover {
+    transform: translateY(-4px) scale(1.02) !important;
+    box-shadow: 
+      0 20px 40px rgba(0, 255, 136, 0.15),
+      0 8px 16px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  .kpi-card:hover .kpi-value {
+    transform: scale(1.1) !important;
+    color: #00ff88 !important;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5) !important;
+  }
+  
+  .kpi-card:hover .kpi-icon {
+    transform: rotate(5deg) scale(1.2) !important;
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.6)) !important;
+  }
+  
+  .pie-chart-container:hover {
+    transform: scale(1.05) !important;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.3)) !important;
+  }
+  
+  /* Effets glassmorphism complets sur desktop */
+  .glass-morphism:hover {
+    backdrop-filter: blur(15px) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(0, 255, 136, 0.3) !important;
+  }
+  
+  /* Preset buttons avec effets complets */
+  .preset-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  .preset-btn:hover::before {
+    left: 100% !important;
+  }
+}
+
+/* ===== ULTRA-WIDE SCREENS (1440px+) ===== */
+
+@media (min-width: 1440px) {
+  .portfolio-kpi-grid {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    gap: 2rem !important;
+  }
+  
+  .kpi-card {
+    padding: 2.5rem !important;
+    min-height: 160px !important;
+  }
+  
+  .kpi-value {
+    font-size: 2.5rem !important;
+  }
+  
+  .pie-chart-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    gap: 3rem !important;
+  }
+}
+
+/* ===== TOUCH DEVICE OPTIMIZATIONS ===== */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Désactiver les hover effects sur touch */
+  .kpi-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  .pie-chart-container:hover {
+    transform: none !important;
+    filter: none !important;
+  }
+  
+  .preset-btn:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Améliorer les interactions tactiles */
+  .kpi-card {
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0, 255, 136, 0.2) !important;
+  }
+  
+  .preset-btn {
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2) !important;
+    min-height: 48px !important;
+  }
+  
+  /* Feedback tactile pour les sliders */
+  .allocation-slider input[type="range"] {
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  
+  .allocation-slider input[type="range"]::-webkit-slider-thumb {
+    width: 28px !important;
+    height: 28px !important;
+    border: 3px solid #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+/* ===== LANDSCAPE MOBILE OPTIMIZATIONS ===== */
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .portfolio-kpi-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1rem !important;
+  }
+  
+  .kpi-card {
+    padding: 1rem !important;
+    min-height: 100px !important;
+  }
+  
+  .kpi-value {
+    font-size: 1.25rem !important;
+  }
+  
+  .pie-chart-container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* Réduire les animations sur les appareils moins puissants */
+@media (max-width: 768px) and (max-resolution: 1.5dppx) {
+  .kpi-card,
+  .pie-chart-container,
+  .preset-btn {
+    transition: none !important;
+  }
+  
+  .glass-morphism {
+    backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
+/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
+
+/* Focus visible pour la navigation au clavier */
+@media (prefers-reduced-motion: no-preference) {
+  .kpi-card:focus-visible {
+    outline: 2px solid #00ff88 !important;
+    outline-offset: 2px !important;
+    transform: translateY(-2px) !important;
+  }
+  
+  .preset-btn:focus-visible {
+    outline: 2px solid #3b82f6 !important;
+    outline-offset: 2px !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .kpi-card {
+    border: 2px solid #ffffff !important;
+    background: #000000 !important;
+  }
+  
+  .kpi-value {
+    color: #ffffff !important;
+    text-shadow: none !important;
+  }
+  
+  .glass-morphism {
+    backdrop-filter: none !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+    border: 2px solid #ffffff !important;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+
+@media print {
+  .kpi-card,
+  .pie-chart-container {
+    break-inside: avoid !important;
+    background: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+  
+  .preset-btn,
+  .firebase-controls {
+    display: none !important;
+  }
+  
+  .portfolio-kpi-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+/* ===== CONTAINER QUERIES (Future-proofing) ===== */
+
+/* Quand les container queries seront mieux supportées */
+@supports (container-type: inline-size) {
+  .portfolio-container {
+    container-type: inline-size;
+  }
+  
+  @container (max-width: 600px) {
+    .portfolio-kpi-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+  
+  @container (min-width: 900px) {
+    .portfolio-kpi-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+  }
+}
+
